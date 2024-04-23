@@ -68,23 +68,23 @@ public class UserController {
     	return userOrders;
     }
     
-    @GetMapping("/orderAndProductDetailsByUserId/{id}")
-    public Mono<UserOrderAggregator> getOrderAndProductDetailsByUserId(@PathVariable Long id){
-    	
-    	return Mono.zip(
-    			userRepo.findById(id).get(),
-//    			this.webClientBuilder.build().get().uri("http://order/ordersByUserId/{id}", id).retrieve().bodyToMono(Order.class)
-//    			this.webClientBuilder.build().get().uri("http://product/productById/{id}", id).retrieve().bodyToMono(Product.class)
-    			).map(tuple -> {
-    				
-    			});
-    	
-    	Flux<Order> userOrders = webClientBuilder.build().get().uri("http://order/ordersByUserId/{id}", id).retrieve().bodyToFlux(Order.class);
-    	userOrders.doOnNext(order -> System.out.println(order.toString()));
-    	Flux<Product> products = webClientBuilder.build().get().uri("http://product/productById/{id}", id).retrieve().bodyToFlux(Product.class);
-    	products.doOnNext(product -> System.out.println(product.toString()));
-    	return userOrders;
-    }
+//    @GetMapping("/orderAndProductDetailsByUserId/{id}")
+//    public Mono<UserOrderAggregator> getOrderAndProductDetailsByUserId(@PathVariable Long id){
+//    	
+//    	return Mono.zip(
+//    			userRepo.findById(id).get(),
+////    			this.webClientBuilder.build().get().uri("http://order/ordersByUserId/{id}", id).retrieve().bodyToMono(Order.class)
+////    			this.webClientBuilder.build().get().uri("http://product/productById/{id}", id).retrieve().bodyToMono(Product.class)
+//    			).map(tuple -> {
+//    				
+//    			});
+//    	
+//    	Flux<Order> userOrders = webClientBuilder.build().get().uri("http://order/ordersByUserId/{id}", id).retrieve().bodyToFlux(Order.class);
+//    	userOrders.doOnNext(order -> System.out.println(order.toString()));
+//    	Flux<Product> products = webClientBuilder.build().get().uri("http://product/productById/{id}", id).retrieve().bodyToFlux(Product.class);
+//    	products.doOnNext(product -> System.out.println(product.toString()));
+//    	return userOrders;
+//    }
     
 
 }
