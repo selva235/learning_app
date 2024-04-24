@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:9080")
 public class UserController {
 	
 	@Autowired
@@ -64,7 +66,8 @@ public class UserController {
     @GetMapping("/ordersByUserId/{id}")
     public Flux<Order> getOrdersByUserId(@PathVariable Long id){
     	
-    	Flux<Order> userOrders = webClientBuilder.build().get().uri("http://order/ordersByUserId/{id}", id).retrieve().bodyToFlux(Order.class);
+    	Flux<Order> userOrders = webClientBuilder.build().get().uri("http://order/orderservice/ordersByUserId/{id}", id).retrieve().bodyToFlux(Order.class);
+//    	Flux<Order> userOrders = webClientBuilder.build().get().uri("http://gateway/orderservice/ordersByUserId/{id}", id).retrieve().bodyToFlux(Order.class);
     	return userOrders;
     }
     
